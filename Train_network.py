@@ -3,6 +3,7 @@ import tensorflow as tf
 import cv2 as cv
 from tqdm import tqdm
 from datetime import datetime
+from Positioning_system.Network_arch import NNDR
 
 
 PATH_ORIG = 'C:/TF/Det_rec/Orig/'

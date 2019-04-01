@@ -1095,7 +1095,6 @@ class MainPositionClass:
     def drawing_operations(self, target_image, points, angle, lines, number_of_contour, name_of_detail):
         """Отрисовка текста и сетки"""
         new_image = target_image.copy()
-        # new_image = cv.cvtColor(target_image, cv.COLOR_RGB2BGR)
 
         scale_factor = new_image.shape[0] // 480
         cv.circle(new_image, tuple(points), 2 * scale_factor, (50, 50, 255), -1)

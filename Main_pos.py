@@ -1,6 +1,8 @@
 import numpy as nmp
 import tensorflow as tf
 import cv2 as cv
+from Positioning_system.Mach_view import MainPositionClass
+from Positioning_system.Network_arch import NNDR
 
 
 PATH_ORIG = 'C:/TF/Det_rec/Orig/'
@@ -46,7 +48,6 @@ def all_together_3():
                      scale_size=(100, 100))
 
     last_frame = nmp.zeros([480, 640, 3], nmp.uint8)
-    pre_last_frame = nmp.zeros([480, 640, 3], nmp.uint8)
     font = cv.FONT_HERSHEY_SIMPLEX
 
     sv = tf.Session()
@@ -65,14 +66,7 @@ def all_together_3():
             ret, frame = cap.read()
             if ret:
                 fr1 = frame
-                # fr1 = cv.GaussianBlur(fr1, (5, 5), 0.5)
-                # fr1 = cv.add(last_frame, fr1) // 2
                 fr1 = ((fr1.astype(nmp.float32) + last_frame.astype(nmp.float32)) / 2).astype(nmp.uint8)
-                # fr1 = ((fr1.astype(nmp.float32)
-                #         + last_frame.astype(nmp.float32)
-                #         + pre_last_frame.astype(nmp.float32)) / 3).astype(nmp.uint8)
-                # fr1 = cv.cvtColor(fr1, cv.COLOR_RGB2BGR)
-                # pre_last_frame = last_frame
                 last_frame = frame
 
                 if nmp.mean(fr1) < 130:
@@ -132,8 +126,6 @@ def all_together_3():
             else:
                 print('Пропущен кадр')
                 break
-                # if cv.waitKey(1) & 0xFF == ord('q'):
-                #     break
 
     cv.destroyAllWindows()
     cap.release()
