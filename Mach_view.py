@@ -826,7 +826,7 @@ class MainPositionClass:
 
             # # К полярным координатам
             small_target_image = self.target_minimize_storage
-            small_target_contour = self.target_min_contours_storage[0]
+            small_target_contour = self.target_min_contours_storage[num]
 
             loc_angle = self.to_polar_and_find_template_2(small_target_contour, orig_contour,
                                                           orig_image, small_target_image)
